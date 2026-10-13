@@ -1,0 +1,16 @@
+{% extends "admin/base_site.html" %}
+{% block content %}
+<div style="max-width:640px">
+  <p>You'll see <strong>{{ person.full_name }}</strong>'s space ({{ person.get_role_display }}, {{ person.phone }}) exactly as they do.
+     Anything you change there is saved to their account.</p>
+  <ul>
+    <li>This logs you out of the staff admin in this browser. To come back, sign out of their space and log in to <code>/admin</code> again.</li>
+    <li>Tip: do this in an InPrivate window so your staff login stays open in your normal window.</li>
+    <li>This visit is recorded in the admin history.</li>
+  </ul>
+  <form method="post">{% csrf_token %}
+    <input type="submit" value="Yes, view as {{ person.full_name }}" class="default" style="float:none">
+    <a href="{% url 'admin:accounts_user_change' person.pk %}" class="button cancel-link" style="margin-left:10px">Cancel</a>
+  </form>
+</div>
+{% endblock %}
